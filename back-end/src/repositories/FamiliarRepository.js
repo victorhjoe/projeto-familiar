@@ -7,6 +7,14 @@ class FamiliarRepository {
         return database.familiares.find(familiar => familiar.id == id);
     }
 
+    findByIdentidadeAscendente(identidadeAscendente) {
+        return database.familiares.filter(fam => fam.identidadeAscendente === identidadeAscendente);
+    }
+
+    findByIdentidade(identidade) {
+        return database.familiares.find(fam => fam.identidade === identidade);
+    }
+
     save(familiar) {
         this.ultimoId++;
         familiar.id = this.ultimoId;

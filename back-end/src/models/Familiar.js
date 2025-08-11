@@ -7,7 +7,7 @@ class Familiar {
         this.nome = obj.nome;
         this.dataNascimento = obj.dataNascimento;
         this.identidade = obj.identidade
-        this.idAscendente = obj.idAscendente;
+        this.identidadeAscendente = obj.identidadeAscendente;
         this.descendentes = [];
     }
 

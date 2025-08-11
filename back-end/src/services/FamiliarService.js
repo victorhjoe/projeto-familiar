@@ -1,4 +1,4 @@
-const { NaoEncontradoErro, AplicacaoErro } = require("../erros/TypeErros");
+const { NaoEncontradoErro, AplicacaoErro, ModeloInvalidoErro } = require("../erros/TypeErros");
 const Familiar = require("../models/Familiar");
 
 class FamiliarService {
@@ -13,11 +13,21 @@ class FamiliarService {
        if(!familiar) {
             throw new NaoEncontradoErro(404, "Não foi possível encontrar o familiar pelo id " + id);
        }
+       
+        const descendentes = this.familiarRepository.findByIdentidadeAscendente(familiar.identidade) || [];
+
+        familiar.descendentes = descendentes;
 
        return familiar;
     }
 
     cadastrar(familiar) {
+        const existente = this.familiarRepository.findByIdentidade(familiar.identidade);
+
+        if (existente) {
+            throw new ModeloInvalidoErro(400, `Já existe um familiar cadastrado com a identidade ${familiar.identidade}`);
+        }
+
         let familiarCadastrado = this.familiarRepository.save(familiar);
 
         if(!familiarCadastrado) {
