@@ -1,11 +1,5 @@
 const database = {
-    familiares: [{
-        id: 1,
-        nome: "Victor Hugo",
-        dataNascimento: "",
-        identidade: "",
-        idAscendente: ""
-    }]
+    familiares: []
 };
 
 module.exports = {

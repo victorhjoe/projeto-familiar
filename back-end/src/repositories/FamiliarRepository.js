@@ -8,15 +8,15 @@ class FamiliarRepository {
     }
 
     save(familiar) {
-        ultimoid++;
-        familiar.id = ultimoid;
+        this.ultimoId++;
+        familiar.id = this.ultimoId;
         database.familiares.push(familiar);
         return familiar;
     }
 
-    update(id,familiar) {
-        const indexFamiliar = database.familiares.findIndex(f => f.id == id);
-        if (index === -1) return null;
+    update(familiar) {
+        const indexFamiliar = database.familiares.findIndex(f => f.id == familiar.id);
+        if (indexFamiliar === -1) return null;
 
         database.familiares[indexFamiliar] = {...database.familiares[indexFamiliar], ...familiar};
         return database.familiares[indexFamiliar];
@@ -24,9 +24,9 @@ class FamiliarRepository {
     
     delete(id) {
         const indexFamiliar = database.familiares.findIndex(f => f.id == id);
-        if (index === -1) return null;
+        if (indexFamiliar === -1) return null;
 
-        db.users.splice(index, 1);
+        database.familiares.splice(indexFamiliar, 1);
 
         return true;
     }
