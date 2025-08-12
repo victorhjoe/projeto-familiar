@@ -1,5 +1,5 @@
 export interface IFamiliar {
-    id?: Number, 
+    id?: string | null, 
     nome: string, 
     dataNascimento: Date, 
     identidade: string,

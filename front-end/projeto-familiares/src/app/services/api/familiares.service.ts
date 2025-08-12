@@ -22,4 +22,8 @@ export class FamiliaresService {
   public postFamiliar$(familiar: IFamiliar) {
     return this.#http.post<IFamiliar>(this.#url(), familiar);
   }
+
+  public putFamiliar(familiar: IFamiliar) {
+    return this.#http.put<IFamiliar>(`${this.#url()}/${familiar.id}`, familiar)
+  }
 }

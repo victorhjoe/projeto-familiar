@@ -31,8 +31,8 @@ export class HomeComponent implements OnInit{
     this.#router.navigate(['/perfil', item.id]);
   }
 
-  onEdit() {
-    console.log('edita');
+  onEdit(item: IFamiliar) {
+    this.#router.navigate(['/editar', item.id]);
   }
 
   onDelete() {

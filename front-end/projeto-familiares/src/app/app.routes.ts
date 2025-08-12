@@ -15,5 +15,9 @@ export const routes: Routes = [
     {
         path: 'perfil/:id',
         component: PerfilFamiliarComponent
+    },
+    {
+        path: 'editar/:id',
+        component: FormFamiliarComponent
     }
 ];
