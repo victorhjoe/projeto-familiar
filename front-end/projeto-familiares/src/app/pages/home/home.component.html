@@ -1,0 +1,36 @@
+<div class="flex items-center justify-center min-h-[calc(100vh-64px)] px-4">
+  <div class="w-full max-w-4xl p-6 bg-white rounded-lg shadow-md">
+
+    <button class="mb-6 w-40 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-500 transition">
+      Cadastrar
+    </button>
+
+    <table class="min-w-full border border-gray-200 rounded">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">Nome</th>
+          <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">Data de Nascimento</th>
+          <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">Identidade</th>
+          <th class="py-2 px-4 text-center text-sm font-semibold text-gray-700">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of familiares(); track item) {
+            <tr class="border-t border-gray-200 hover:bg-gray-50">
+              <td class="py-2 px-4">{{ item.nome }}</td>
+              <td class="py-2 px-4">{{ item.dataNascimento }}</td>
+              <td class="py-2 px-4">{{item.identidade}}</td>
+              <td class="py-2 px-4 text-center">
+                    <app-action-buttons
+                        (view)="onView()"
+                        (edit)="onEdit()"
+                        (delete)="onDelete()">
+                    </app-action-buttons>
+                </td>
+            </tr>
+        }
+      </tbody>
+    </table>
+
+  </div>
+</div>

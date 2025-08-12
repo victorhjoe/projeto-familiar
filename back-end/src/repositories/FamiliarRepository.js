@@ -3,6 +3,10 @@ const { database } = require('../database/memoryDB');
 class FamiliarRepository {
     ultimoId = 0;
 
+    findAll() {
+        return database.familiares;
+    }
+
     findById(id) {
         return database.familiares.find(familiar => familiar.id == id);
     }

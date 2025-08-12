@@ -8,6 +8,16 @@ class FamiliarController {
         this.familiarService = new FamiliarService(new FamiliarRepository());
     }
 
+    obterTodos = (req, res) => {
+        try {
+            const familiares = this.familiarService.obterTodos();
+            return res.json(familiares);
+        } catch (error) {
+            console.log(error);
+            return res.status(error.status || 500).json(error);
+        }
+    }
+
     obterPorId = (req, res) => {
         const { id } = req.params;
 

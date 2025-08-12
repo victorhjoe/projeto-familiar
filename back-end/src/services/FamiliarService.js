@@ -6,6 +6,13 @@ class FamiliarService {
     constructor(familiarRepository) {
         this.familiarRepository = familiarRepository;
     }
+
+    obterTodos() {
+        let familiares = this.familiarRepository.findAll();
+
+        return familiares;
+    }
+
     
     obterPorId(id) {
        let familiar = this.familiarRepository.findById(id);
