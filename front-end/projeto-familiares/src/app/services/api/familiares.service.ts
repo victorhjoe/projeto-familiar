@@ -14,4 +14,8 @@ export class FamiliaresService {
   public httpListFamiliares$(): Observable<null | Array<IFamiliar>> {
     return this.#http.get<IFamiliar[]>(this.#url());
   }
+
+  public postFamiliar$(familiar: IFamiliar) {
+    return this.#http.post<IFamiliar>(this.#url(), familiar);
+  }
 }

@@ -2,12 +2,13 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActionButtonsComponent } from '../../components/action-buttons/action-buttons.component';
 import { FamiliaresService } from '../../services/api/familiares.service';
 import { IFamiliar } from '../../interfaces/iFamiliar';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ActionButtonsComponent],
+  imports: [ActionButtonsComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -18,10 +19,7 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void{
     this.#familiaresService.httpListFamiliares$().subscribe({
       next: (next) => {
-        console.log(next)
         this.familiares.set(next);
-        console.log('this.familiares', this.familiares());
-        
       },
       error: (error) => console.log(error)
     })
@@ -29,7 +27,6 @@ export class HomeComponent implements OnInit{
 
   onView() {
     console.log('visualiza');
-    
   }
 
   onEdit() {

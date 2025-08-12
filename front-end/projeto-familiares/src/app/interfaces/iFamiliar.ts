@@ -1,6 +1,8 @@
 export interface IFamiliar {
-    id: Number, 
+    id?: Number, 
     nome: string, 
     dataNascimento: Date, 
-    identidade: string
+    identidade: string,
+    identidadeAscendente?: string,
+    descendente?: string
 }
