@@ -2,18 +2,20 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActionButtonsComponent } from '../../components/action-buttons/action-buttons.component';
 import { FamiliaresService } from '../../services/api/familiares.service';
 import { IFamiliar } from '../../interfaces/iFamiliar';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ActionButtonsComponent, RouterLink],
+  imports: [ActionButtonsComponent, RouterLink, DatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   #familiaresService = inject(FamiliaresService);
+  #router = inject(Router);
   public familiares = signal<null | IFamiliar[]>(null);
 
   ngOnInit(): void{
@@ -25,8 +27,8 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  onView() {
-    console.log('visualiza');
+  onView(item: IFamiliar) {
+    this.#router.navigate(['/perfil', item.id]);
   }
 
   onEdit() {

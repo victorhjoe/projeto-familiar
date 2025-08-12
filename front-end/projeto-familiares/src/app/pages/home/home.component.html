@@ -18,11 +18,11 @@
         @for (item of familiares(); track item) {
             <tr class="border-t border-gray-200 hover:bg-gray-50">
               <td class="py-2 px-4">{{ item.nome }}</td>
-              <td class="py-2 px-4">{{ item.dataNascimento }}</td>
+              <td class="py-2 px-4">{{ item.dataNascimento | date:'dd/MM/yyyy'}}</td>
               <td class="py-2 px-4">{{item.identidade}}</td>
               <td class="py-2 px-4 text-center">
                     <app-action-buttons
-                        (view)="onView()"
+                        (view)="onView(item)"
                         (edit)="onEdit()"
                         (delete)="onDelete()">
                     </app-action-buttons>

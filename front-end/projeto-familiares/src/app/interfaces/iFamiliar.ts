@@ -4,5 +4,5 @@ export interface IFamiliar {
     dataNascimento: Date, 
     identidade: string,
     identidadeAscendente?: string,
-    descendente?: string
+    descendentes?: Array<IFamiliar>
 }

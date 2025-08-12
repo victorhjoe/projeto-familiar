@@ -1,0 +1,34 @@
+<div class="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center p-4">
+    <div class="max-w-3xl w-full bg-white rounded-lg shadow-md p-6 overflow-auto max-h-[90vh]">
+        <button
+        routerLink=""
+        class="mb-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-500 transition"
+        >
+        ← Voltar
+        </button>
+        <h2 class="text-2xl font-semibold mb-4">Perfil de {{ familiar?.nome }}</h2>
+  
+        <div class="mb-6 space-y-1">
+            <p><span class="font-semibold">Data de Nascimento:</span> {{ familiar?.dataNascimento | date:'dd/MM/yyyy' }}</p>
+            <p><span class="font-semibold">Identidade:</span> {{ familiar?.identidade }}</p>
+
+            @if (familiar?.identidadeAscendente){
+                <p><span class="font-semibold">Identidade Ascendente:</span> {{ familiar?.identidadeAscendente }}</p>
+            }
+        </div>
+
+        
+        @if (familiar?.descendentes?.length){
+            <h3 class="text-xl font-semibold mb-3">Descendentes</h3>
+            <ul class="space-y-2">
+                @for (item of familiar?.descendentes; track item) {
+                <li class="p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                    <span class="font-medium">{{ item.nome }}</span>
+                    <span class="text-sm text-gray-500 ml-2">{{ item.dataNascimento | date:'dd/MM/yyyy' }}</span>
+                </li>
+                } 
+            </ul>
+        }
+    </div>      
+</div>
+

@@ -15,6 +15,10 @@ export class FamiliaresService {
     return this.#http.get<IFamiliar[]>(this.#url());
   }
 
+  public getFamiliarById$(id: string) {
+    return this.#http.get<IFamiliar>(`${this.#url()}/${id}`);
+  }
+
   public postFamiliar$(familiar: IFamiliar) {
     return this.#http.post<IFamiliar>(this.#url(), familiar);
   }
