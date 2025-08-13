@@ -26,4 +26,8 @@ export class FamiliaresService {
   public putFamiliar(familiar: IFamiliar) {
     return this.#http.put<IFamiliar>(`${this.#url()}/${familiar.id}`, familiar)
   }
+
+  public deleteFamiliar$(id: string) {
+    return this.#http.delete(`${this.#url()}/${id}`)
+  }
 }

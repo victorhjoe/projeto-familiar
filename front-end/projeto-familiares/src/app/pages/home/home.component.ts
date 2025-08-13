@@ -4,12 +4,13 @@ import { FamiliaresService } from '../../services/api/familiares.service';
 import { IFamiliar } from '../../interfaces/iFamiliar';
 import { Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { ComfirmModalComponent } from '../../components/comfirm-modal/comfirm-modal.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ActionButtonsComponent, RouterLink, DatePipe],
+  imports: [ActionButtonsComponent, RouterLink, DatePipe, ComfirmModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,8 +18,14 @@ export class HomeComponent implements OnInit{
   #familiaresService = inject(FamiliaresService);
   #router = inject(Router);
   public familiares = signal<null | IFamiliar[]>(null);
+  public modalVisible = signal(false);
+  public familiarParaExcluir = signal<IFamiliar | null>(null);
 
   ngOnInit(): void{
+    this.carregarFamiliares();
+  }
+
+  carregarFamiliares() {
     this.#familiaresService.httpListFamiliares$().subscribe({
       next: (next) => {
         this.familiares.set(next);
@@ -35,7 +42,26 @@ export class HomeComponent implements OnInit{
     this.#router.navigate(['/editar', item.id]);
   }
 
+  confirmaExclusao(item: IFamiliar) {
+    this.familiarParaExcluir.set(item);
+    this.modalVisible.set(true);
+  }
+
+  fecharModal() {
+    this.modalVisible.set(false);
+    this.familiarParaExcluir.set(null);
+  }
+
   onDelete() {
-    console.log('exclui');
+    const item = this.familiarParaExcluir();
+
+    if(item?.id) {
+      this.#familiaresService.deleteFamiliar$(item.id).subscribe({
+        next: (next) => {
+          this.carregarFamiliares();
+          this.fecharModal();
+        }
+      })
+    }
   }
 }

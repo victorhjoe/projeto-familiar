@@ -24,7 +24,7 @@
                     <app-action-buttons
                         (view)="onView(item)"
                         (edit)="onEdit(item)"
-                        (delete)="onDelete()">
+                        (delete)="confirmaExclusao(item)">
                     </app-action-buttons>
                 </td>
             </tr>
@@ -46,5 +46,12 @@
       </tbody>
     </table>
 
+    <app-comfirm-modal
+      [visible]="modalVisible()"
+      title="Excluir familiar"
+      [message]="'Tem certeza que deseja excluir ' + (familiarParaExcluir()?.nome ?? '') + '?'"
+      (confirm)="onDelete()"
+      (cancel)="fecharModal()"
+  ></app-comfirm-modal>
   </div>
 </div>
